@@ -1,0 +1,149 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "ProviEmplea API",
+        "description": "API REST para gestión de empleos",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/empleos": {
+            "get": {
+                "tags": [
+                    "Empleos"
+                ],
+                "summary": "Listar empleos",
+                "operationId": "bd5ea3ffb5b99aa611b265a8a53e445e",
+                "responses": {
+                    "200": {
+                        "description": "Lista de empleos"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Empleos"
+                ],
+                "summary": "Crear empleo",
+                "operationId": "b18748d09ace6deafaaa435bbdc2f30e",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "titulo",
+                                    "descripcion",
+                                    "empresa"
+                                ],
+                                "properties": {
+                                    "titulo": {
+                                        "type": "string"
+                                    },
+                                    "descripcion": {
+                                        "type": "string"
+                                    },
+                                    "empresa": {
+                                        "type": "string"
+                                    },
+                                    "ubicacion": {
+                                        "type": "string"
+                                    },
+                                    "salario": {
+                                        "type": "number"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Empleo creado correctamente"
+                    }
+                }
+            }
+        },
+        "/api/empleos/{id}": {
+            "put": {
+                "tags": [
+                    "Empleos"
+                ],
+                "summary": "Actualizar empleo",
+                "operationId": "8b9da910f700fa587385f281a93d8890",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del empleo",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "titulo": {
+                                        "type": "string"
+                                    },
+                                    "descripcion": {
+                                        "type": "string"
+                                    },
+                                    "empresa": {
+                                        "type": "string"
+                                    },
+                                    "ubicacion": {
+                                        "type": "string"
+                                    },
+                                    "salario": {
+                                        "type": "number"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Empleo actualizado correctamente"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Empleos"
+                ],
+                "summary": "Eliminar empleo",
+                "operationId": "4a1b0b76866fd42fc1d6a35112a38ac2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID del empleo",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Empleo eliminado correctamente"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Empleos",
+            "description": "Empleos"
+        }
+    ]
+}
