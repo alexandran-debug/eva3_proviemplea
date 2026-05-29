@@ -1,14 +1,27 @@
 # ProviEmplea API
 
-API REST desarrollada con Laravel 11 para la gestión de empleos utilizando Docker, MySQL, Swagger y Postman.
+API REST desarrollada con Laravel 11 para la gestión de talento y empleabilidad, utilizando Docker, MySQL, Swagger (OpenAPI) y Postman.
 
 ---
 
 # Descripción del Proyecto
 
-ProviEmplea API es un sistema backend desarrollado como una API RESTful para administrar empleos. El proyecto permite realizar operaciones CRUD completas sobre los registros de empleos.
+ProviEmplea API es un sistema backend desarrollado como una API RESTful para la gestión integral de empleabilidad. Permite administrar perfiles de personas (talentos), empresas y procesos de contacto laboral, implementando un enfoque de CV ciego para la evaluación imparcial de candidatos.
 
-La aplicación fue desarrollada utilizando Laravel 11 y ejecutada mediante contenedores Docker, utilizando MySQL como motor de base de datos y Swagger para la documentación interactiva de la API.
+La aplicación fue desarrollada con Laravel 11, ejecutada en contenedores Docker, utilizando MySQL como base de datos relacional, y Swagger (OpenAPI 3.0) para la documentación interactiva de la API.
+
+---
+
+## Arquitectura del Sistema
+
+El proyecto sigue una arquitectura MVC (Model - View - Controller) adaptada a API REST:
+
+- Controllers: manejo de endpoints y lógica HTTP
+- Models: interacción con base de datos MySQL
+- Requests/Validation: validación de datos de entrada
+- Swagger (OpenAPI): documentación automática de endpoints
+- Docker: entorno de desarrollo aislado y replicable
+- Postman: pruebas funcionales de la API
 
 ---
 
@@ -29,13 +42,35 @@ La aplicación fue desarrollada utilizando Laravel 11 y ejecutada mediante conte
 
 La API permite:
 
-- Listar empleos
-- Crear empleos
-- Actualizar empleos
-- Eliminar empleos
+**Gestión de Personas (Talentos)**
 
-Además:
+- Crear perfiles de talento
+- Listar talentos (CV ciego)
+- Actualizar información profesional
+- Eliminar/desactivar perfiles
+- Validación de perfiles
 
+**Gestión de Empresas**
+
+- Registro de empresas
+- Actualización de datos empresariales
+- Validación de empresas
+- Eliminación lógica de registros
+
+**Sistema de Contactos**
+
+- Registro de solicitudes empresa–talento
+- Gestión de estados del proceso (pendiente, entrevista, seleccionado, etc.)
+- Control de etapas de contratación
+
+**Administración**
+
+- Estadísticas generales de la plataforma
+- Control de procesos de reclutamiento
+
+**General**
+
+- API REST completa
 - Documentación automática con Swagger
 - Contenedores Docker funcionales
 - Persistencia de datos con MySQL
@@ -142,9 +177,25 @@ cd eva3_proviemplea/backend
 docker compose up -d --build
 ```
 
+## 4. Instalar dependencias
+
+```bash
+docker compose exec app composer install
+```
+
 ---
 
-## 4. Verificar contenedores activos
+## 5. Configurar entorno (.env)
+
+Si no existe el archivo .env, créalo:
+
+cp .env.example .env
+
+**Generar la clave de la aplicación:**
+
+docker compose exec app php artisan key:generate
+
+## 6. Verificar contenedores activos
 
 ```bash
 docker ps
@@ -152,10 +203,18 @@ docker ps
 
 ---
 
-## 5. Ejecutar migraciones
+## 7. Ejecutar migraciones
 
 ```bash
 docker compose exec app php artisan migrate
+```
+
+---
+
+## 8. Generar documentación Swagger
+
+```bash
+docker compose exec app php artisan l5-swagger:generate
 ```
 
 ---
@@ -267,27 +326,31 @@ http://localhost:8080/api/documentation
 
 # Pruebas Realizadas
 
-Las pruebas de la API fueron realizadas utilizando Postman y Swagger.
+Las pruebas fueron realizadas utilizando Postman y Swagger UI, verificando:
 
-Se verificó el correcto funcionamiento de:
+- Creación de registros (201 Created)
+- Consultas exitosas (200 OK)
+- Validación de errores (422 Unprocessable Entity)
+- Recursos no encontrados (404)
+- Conflictos de datos (409)
+- Persistencia en MySQL
+- Consistencia entre Swagger y endpoints reales
 
-- GET
-- POST
-- PUT
-- DELETE
+## Estado del Proyecto
 
-También se comprobó:
-
-- Funcionamiento de Docker
-- Funcionamiento de MySQL
-- Documentación automática con Swagger
-- Respuestas JSON de la API
+- API REST funcional
+- Arquitectura MVC implementada
+- Swagger/OpenAPI operativo
+- Docker configurado correctamente
+- Base de datos MySQL conectada
+- Pruebas en Postman realizadas
+- Evidencias visuales incluidas
 
 ---
 
 # Resultado Final
 
-El proyecto quedó completamente funcional, ejecutándose mediante contenedores Docker y permitiendo la administración completa de empleos mediante una API REST desarrollada con Laravel 11.
+El proyecto ProviEmplea API se encuentra completamente funcional, con arquitectura escalable, documentación interactiva y entorno de desarrollo reproducible mediante Docker, cumpliendo los requerimientos de una API REST profesional de nivel académico y portafolio.
 
 ---
 
