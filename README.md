@@ -185,15 +185,34 @@ docker compose exec app composer install
 
 ---
 
-## 5. Configurar entorno (.env)
+## 5. Configuración del entorno (.env)
 
-Si no existe el archivo .env, créalo:
+El proyecto utiliza un archivo .env para la configuración global de la aplicación, incluyendo base de datos, entorno y URL del sistema.
 
+### 5.1 Crear archivo de entorno
+
+```bash
 cp .env.example .env
+```
+
+**Variables de entorno principales**
+
+- APP_NAME → Nombre del proyecto
+- APP_URL → URL local (http://localhost:8080)
+- DB_CONNECTION → tipo de base de datos (mysql)
+- DB_HOST → host de la base de datos (en Docker: mysql)
+- DB_PORT → puerto de MySQL (3306)
+- DB_DATABASE → nnombre de la base de datos del proyecto
+- DB_USERNAME → usuario de la base de datos
+- DB_PASSWORD → contraseña de la base de datos
 
 **Generar la clave de la aplicación:**
 
+Una vez configurado el entorno, se debe generar la clave de Laravel:
+
+```bash
 docker compose exec app php artisan key:generate
+```
 
 ## 6. Verificar contenedores activos
 
